@@ -1,21 +1,21 @@
 version: "3.6"
 services:
   redis-master1:
-     image: redis-cluster #镜像
-     container_name: redis-master1
+     image: redis-cluster #使用的镜像
+     container_name: redis-master1 #容器名
      working_dir: /config
-     environment:
+     environment: #设置环境变量
        - PORT=6391
-     ports:
+     ports: # 端口映射
        - "6391:6391"
        - "16391:16391"
      stdin_open: true
-     networks:
+     networks: #网络
         redis-master:
           ipv4_address: 172.50.0.2
      tty: true
-     privileged: true
-     volumes: ["/wwwdata/software/dockerlearn/redis-cluster-test/config:/config"] #共享
+     privileged: true #允许容器高权限操作
+     volumes: ["/wwwdata/software/dockerlearn/redis-cluster-test/config:/config"] #共享目录
      entrypoint: #启动后执行的命令
        - /bin/bash
        - redis.sh
